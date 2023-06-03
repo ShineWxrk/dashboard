@@ -1,0 +1,98 @@
+<div class="row mb-12">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body table-responsive">
+        <table [dataSource]="dataSource" mat-table matSort>
+
+          <ng-container matColumnDef="color">
+            <th *matHeaderCellDef mat-header-cell></th>
+            <td *matCellDef="let task" [style.background-color]="getPriorityColor(task)" mat-cell></td>
+          </ng-container>
+
+          <ng-container matColumnDef="id">
+            <th *matHeaderCellDef mat-header-cell></th>
+            <td *matCellDef="let index = index" mat-cell>
+              {{index + 1}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="title">
+            <th *matHeaderCellDef mat-header-cell mat-sort-header>Name</th>
+            <td *matCellDef="let task" [class.completed]="task.completed" mat-cell>
+              {{task.title}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="date">
+            <th *matHeaderCellDef mat-header-cell mat-sort-header>Date</th>
+            <td *matCellDef="let task" [ngClass]="{'completed': task.completed, 'no': task.date == null}" mat-cell>
+              {{task.date ? (task.date | date: 'short') : 'No date'}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="priority">
+            <th *matHeaderCellDef mat-header-cell mat-sort-header>Priority</th>
+            <td *matCellDef="let task" [ngClass]="{'completed': task.completed, 'no': task.priority == null}" mat-cell>
+              {{task.priority ? task.priority.title : 'No priority'}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="category">
+            <th *matHeaderCellDef mat-header-cell mat-sort-header>Category</th>
+            <td *matCellDef="let task" [ngClass]="{'completed': task.completed, 'no': task.category == null}" mat-cell>
+              {{task.category ? task.category.title : 'No category'}}
+            </td>
+          </ng-container>
+
+
+
+          <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+          <tr *matRowDef="let row; columns: displayedColumns" mat-row></tr>
+
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20, 100]" showFirstLastButtons></mat-paginator>
+
+
+
+       <!-- <table class="table table-hover">
+          <thead class="text">
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Category</th>
+              <th>Priority</th>
+              <th>Date</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let task of tasks" [class.completed]="task.completed">
+              <td>
+                <div class="form-check">
+                  <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" value="" (click)="toogleTaskCompleted(task)" [checked]="task.completed">
+                    <span class="form-check-sign">
+                      <span class="check"></span>
+                    </span>
+                  </label>
+                </div>
+              </td>
+              <td>{{task.title}}</td>
+              <td [class.no]="task.category == null">{{task.category != null ? task.category.title : 'No category'}}</td>
+              <td [class.no]="task.priority == null">{{task.priority != null ? task.priority.title : 'No priority'}}</td>
+              <td [class.no]="task.date == null">{{task.date != null ? (task.date | date: 'short') : 'No date'}}</td>
+              <td></td>
+
+              <div class="ms-auto text-end">
+                <a class="btn btn-link text-dark px-3 mb-0"><i class="material-icons text-sm me-2">edit</i>Edit</a>
+                <a class="btn btn-link text-danger text-gradient px-3 mb-0"><i class="material-icons text-sm me-2">delete</i>Delete</a>
+              </div>
+            </tr>
+          </tbody>
+        </table>-->
+      </div>
+    </div>
+  </div>
+</div>
