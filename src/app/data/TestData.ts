@@ -26,7 +26,7 @@ export class TestData {
       id: 1,
       title: 'Test 1',
       priority: TestData.priorities[2],
-      completed: false,
+      completed: true,
       category: TestData.categories[2],
       date: new Date('2023-06-01')
     },
@@ -35,14 +35,14 @@ export class TestData {
       title: 'Test 2',
       priority: TestData.priorities[1],
       completed: false,
-      category: TestData.categories[1],
+
       date: new Date('2023-06-02')
     },
     {
       id: 3,
       title: 'Test 3',
       priority: TestData.priorities[3],
-      completed: false,
+      completed: true,
       category: TestData.categories[4],
       date: new Date('2023-06-03')
     },
