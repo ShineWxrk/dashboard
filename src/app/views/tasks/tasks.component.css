@@ -6,3 +6,10 @@
 .no {
   color: #ff5959
 }
+
+.not-found {
+  margin: 30px 0px;
+  font-size: 20px;
+  color: black;
+  text-align: center;
+}

@@ -2,7 +2,7 @@
   <div class="col-md-12">
     <div class="card">
       <div class="card-body table-responsive">
-        <table [dataSource]="dataSource" mat-table matSort>
+        <table [dataSource]="dataSource" mat-table matSort *ngIf="tasks && tasks.length > 0">
 
           <ng-container matColumnDef="color">
             <th *matHeaderCellDef mat-header-cell></th>
@@ -93,6 +93,7 @@
           </tbody>
         </table>-->
       </div>
+      <div *ngIf="tasks && tasks.length == 0"><p class="not-found">Ничего не найдено</p></div>
     </div>
   </div>
 </div>
