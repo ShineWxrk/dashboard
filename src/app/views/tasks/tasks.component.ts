@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -17,8 +17,16 @@ export class TasksComponent implements OnInit {
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator
   @ViewChild(MatSort, {static: false}) sort: MatSort
 
-  @Input()
   tasks: Task[]
+
+  @Input('tasks')
+  set SetTasks(tasks: Task[])  {
+    this. tasks = tasks
+    this.fillTable()
+  }
+
+  @Output()
+  updateTask = new EventEmitter<Task>()
 
   constructor(private dataHandler: DataHandlerService) {
   }
@@ -45,23 +53,29 @@ export class TasksComponent implements OnInit {
   }
 
   private fillTable() {
+    if(!this.tasks) {
+      return
+    }
+
     this.dataSource.data = this.tasks
     this.addTableObjects()
 
-    // @ts-ignore
-    this.dataSource.sortingDataAccessor = (task, colName) => {
+    this.dataSource.sortingDataAccessor = (task: Task, colName: string) => {
       switch (colName) {
         case 'priority': {
-          return task.priority ? task.priority.id : null
+          return task.priority ? task.priority.id : 0;
         }
         case 'category': {
-          return task.category ? task.category.title : null
+          return task.category ? task.category.title : '';
         }
         case 'date': {
-          return task.date ? task.date : null
+          return task.date ? new Date(task.date).getTime() : 0;
         }
         case 'title': {
-          return task.title
+          return task.title;
+        }
+        default: {
+          return '';
         }
       }
     }
@@ -70,6 +84,10 @@ export class TasksComponent implements OnInit {
   private addTableObjects() {
     this.dataSource.sort = this.sort
     this.dataSource.paginator = this.paginator
+  }
+
+  onClickTask(task: Task) {
+    this.updateTask.emit(task)
   }
 }
 
