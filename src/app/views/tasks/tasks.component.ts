@@ -1,7 +1,9 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { EditTaskDailogComponent } from 'src/app/dialog/edit-task-dailog/edit-task-dailog.component';
 import { Task } from 'src/app/model/Task';
 import { DataHandlerService } from 'src/app/service/data-handler.service';
 
@@ -28,7 +30,8 @@ export class TasksComponent implements OnInit {
   @Output()
   updateTask = new EventEmitter<Task>()
 
-  constructor(private dataHandler: DataHandlerService) {
+  constructor(private dataHandler: DataHandlerService,
+              private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -86,7 +89,11 @@ export class TasksComponent implements OnInit {
     this.dataSource.paginator = this.paginator
   }
 
-  onClickTask(task: Task) {
+  openEditTaskDialog(task: Task) {
+    const dialogRef = this.dialog.open(EditTaskDailogComponent, {data: [task, 'Edit task'], autoFocus: false})
+    dialogRef.afterClosed().subscribe(result => {
+      
+    })
     this.updateTask.emit(task)
   }
 }

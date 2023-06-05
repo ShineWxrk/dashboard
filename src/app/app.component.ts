@@ -31,6 +31,6 @@ export class AppComponent implements OnInit{
   }
 
   onUpdateTask(task: Task) {
-    console.log(task)
+
   }
 }
