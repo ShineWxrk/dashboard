@@ -11,7 +11,7 @@ export class EditTaskDailogComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<EditTaskDailogComponent>, @Inject(MAT_DIALOG_DATA)private data: [Task, string]) {}
 
   private dialogTitle: string
-  private task: Task
+  task: Task
 
   ngOnInit() {
     this.task = this.data[0]
