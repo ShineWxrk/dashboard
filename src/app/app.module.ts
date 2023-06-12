@@ -10,6 +10,11 @@ import { MatSortModule } from '@angular/material/sort'
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EditTaskDailogComponent } from './dialog/edit-task-dailog/edit-task-dailog.component'
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -24,7 +29,12 @@ import { EditTaskDailogComponent } from './dialog/edit-task-dailog/edit-task-dai
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    MatDialogModule
+    MatDialogModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

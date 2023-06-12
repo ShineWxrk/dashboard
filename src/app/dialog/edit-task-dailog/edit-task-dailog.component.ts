@@ -10,23 +10,25 @@ import { Task } from 'src/app/model/Task';
 export class EditTaskDailogComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<EditTaskDailogComponent>, @Inject(MAT_DIALOG_DATA)private data: [Task, string]) {}
 
-  private dialogTitle: string
+  dialogTitle: string
   task: Task
+  tmpTitle: string
 
   ngOnInit() {
     this.task = this.data[0]
     this.dialogTitle = this.data[1]
 
-    console.log(this.task)
+    this.tmpTitle = this.task.title
   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
+  onConfirm(): void {
+    this.task.title = this.tmpTitle
+    this.dialogRef.close(this.task)
   }
 
-  onYesClick(): void {
+  onCansel(): void {
     // Handle dialog confirm action here.
-    this.dialogRef.close();
+    this.dialogRef.close(null);
   }
 }
 
